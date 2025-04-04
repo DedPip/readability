@@ -4,7 +4,6 @@
 #include <math.h>
 #include <string.h>
 
-
 int count_letters(string text);
 int count_words(string text, int start, int end);
 int count_sentences(string text);
@@ -13,30 +12,22 @@ const int asciiOfDot = 46, asciiOfBlank = 32, asciiOfComma = 44, asciiOfQuestion
 
 int main(void)
 {
-    // string text = "One fish. Two fish. Red fish. Blue fish.";
-
     string text = get_string("Text: ");
     
     int textLength = strlen(text);
     int numberOfLetters = count_letters(text);
-    printf("%i\n", numberOfLetters);
     int numberOfWords = count_words(text, 0, textLength);
-    printf("%i\n", numberOfWords);
-
     int numberOfSentences = count_sentences(text);
-    printf("%i\n", numberOfSentences);
     
     // l is the average number of letters per 100 words
     float l = ((float) (numberOfLetters * 100)) / numberOfWords;
-    printf("%f\n", l);
+
     //s is the average number of sentences per 100 words
     float s = ((float) (numberOfSentences * 100)) / numberOfWords;
-    printf("%f\n", s);
 
     float index = (0.0588 * l) - (0.296 * s) - 15.8;
-    printf("%f\n", index);
     int index_rounded = round(index);
-    printf("%i\n", index_rounded);
+    
     if (index < 1)
     {
         printf("Before Grade 1\n");
