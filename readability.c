@@ -4,39 +4,36 @@
 #include <ctype.h>
 
 int count_letters(string text);
-int count_words(string text);
+int count_words(string text, int start, int end);
+
+const int asciiOfDot = 46, asciiOfBlank = 32, asciiOfComma = 44, asciiOfQuestion = 63, asciiOfExclm = 33;
 
 int main(void)
 {
     // string text = "One fish. Two fish. Red fish. Blue fish.";
     string text = "Would you like them here or there? I would not like them here or there. I would not like them anywhere.";
-
-    int i = count_words(text);
-    printf("%i\n", i);
+    
+    
+    int textLength = strlen(text);
+    int numberOfWords = count_words(text, 44, textLength);
+    printf("%i\n", numberOfWords);
 
 }
 
-int count_words(string text)
+int count_words(string text, int start, int end)
 {
-    int asciiOfBlank = 32;
     int numberOfWords = 0;
-    for (int i = 0, textLength = strlen(text); i < textLength; i++)
+    while (start < end)
     {
-        if(isalpha(text[i]))
+        if(isalpha(text[start]))
         {
-            int j = i;
-            while ((int) text[j] != asciiOfBlank)
+            while ((int) text[start] != asciiOfBlank && (int) text[start] != asciiOfComma && (int) text[start] != asciiOfDot && (int) text[start] != asciiOfExclm && (int) text[start] != asciiOfQuestion)
             {
-                j++;
+                start++;
             }
-            i = j;
             numberOfWords++;
-            continue;
         }
-        else
-        {
-            continue;
-        }
+        start++;
     }
     return numberOfWords;
 }
